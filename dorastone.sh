@@ -2,9 +2,14 @@
 # DoraStone: Casting dynamic maps in stone for off-the-grid explorers
 # Required: https://github.com/sindresorhus/pageres
 
+# Article to process
+# TODO read list of articles from file
 ARTICLE="Seoul/Jongno"
-WIKICODE="jongno.wikicode"
-set -x
+
+# Download wikicode
+WIKICODE="/tmp/wikicode.txt"
+wget -O $WIKICODE "https://en.wikipedia.org/w/index.php?title=$ARTICLE&action=raw"
+
 # Parse wikicode
 MAPFRAME=`grep apframe $WIKICODE`
 LONGITUDE=`echo $MAPFRAME | sed -e "s/^[^|]*|//g" | sed -e "s/|.*//g"`
